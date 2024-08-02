@@ -1,135 +1,112 @@
-### Summary
 
+# Interactive Story Project
 
+## Overview
 
-### Résumé de l'histoire
+This is an interactive story web application built with Django. The project allows users to make choices within a narrative, leading to different outcomes. The content dynamically updates based on user selections, creating an engaging experience.
 
-L'histoire commence dans une forêt sombre et mystérieuse, où le protagoniste se trouve face à un choix crucial : aller à gauche ou à droite. À chaque décision, l'aventure prend un tournant inattendu. En choisissant d'aller à gauche, le protagoniste rencontre un loup féroce, forçant le joueur à décider entre combattre ou fuir. Aller à droite, en revanche, mène à la découverte d'une carte au trésor, offrant la possibilité de suivre la carte ou de l'ignorer.
+## Features
 
-Au fur et à mesure que l'histoire progresse, chaque choix plonge le protagoniste dans des situations plus dangereuses ou plus agréables. L'objectif ultime est d'atteindre une fin héroïque, que ce soit en explorant un temple ancien, en découvrant des trésors cachés, ou en s'échappant de la forêt. Le joueur doit naviguer à travers ces choix, pesant les risques et les récompenses, pour mener le protagoniste à la gloire ou à la sécurité.
+- **Dynamic Story Navigation:** Users can progress through the story by making choices that direct them to different story nodes.
+- **AJAX Integration:** Choices update the story content dynamically without requiring a full page reload.
+- **Admin Interface:** Easily manage story nodes and choices using Django's built-in admin interface.
+- **Customizable Appearance:** Each story node can have its own text, image, and background color.
 
+## Project Structure
 
+- `interactive_story/`: The main Django project directory.
+  - `settings.py`: Configuration settings for the project.
+  - `urls.py`: URL routing for the project.
+- `story/`: The application handling the interactive story.
+  - `models.py`: Defines the `StoryNode` and `Choice` models.
+  - `views.py`: Handles the rendering of story nodes and processing user choices.
+  - `urls.py`: URL routing specific to the story app.
+  - `admin.py`: Registers the models with the Django admin interface.
+  - `templates/story/home.html`: The HTML template for displaying the story and choices.
 
-This project is an interactive story game built using Flask, HTML, and CSS. The game allows users to navigate through a story by making choices at various decision points. Each choice leads to a different part of the story, with unique images and background colors that reflect the mood of each situation (e.g., danger or pleasure). The goal is to reach a heroic ending by making the right decisions throughout the game.
+## Getting Started
 
-### README
+### Prerequisites
 
-#### Project Title: Interactive Story Game
+- Python 3.x
+- Django 3.x or 4.x
+- A virtual environment is recommended for isolating dependencies.
 
-#### Description
+### Installation
 
-An interactive story game where users navigate through a story by making choices at various decision points. Each decision affects the outcome of the story, leading to different paths and endings. The game features dynamic background colors and images to enhance the storytelling experience.
+1. **Clone the Repository:**
 
-#### Features
-
-- Interactive story with multiple paths and endings
-- Dynamic background colors based on the mood of the situation
-- Unique images for each part of the story
-- Simple and intuitive interface
-
-#### Technologies Used
-
-- Flask (Python)
-- HTML
-- CSS
-- JSON
-
-#### Installation
-
-1. **Clone the repository:**
-
-   ```sh
-   git clone https://github.com/yourusername/interactive-story-game.git
-   cd interactive-story-game
+   ```bash
+   git clone https://github.com/yourusername/interactive-story.git
+   cd interactive-story
    ```
-2. **Create a virtual environment:**
+2. **Set Up the Virtual Environment:**
 
-   ```sh
-   python3 -m venv venv
+   ```bash
+   python3 -m venv env
+   source env/bin/activate
    ```
-3. **Activate the virtual environment:**
+3. **Install Dependencies:**
 
-   - On Windows:
-     ```sh
-     venv\Scripts\activate
-     ```
-   - On macOS/Linux:
-     ```sh
-     source venv/bin/activate
-     ```
-4. **Install the dependencies:**
-
-   ```sh
-   pip install Flask
+   ```bash
+   pip install -r requirements.txt
    ```
+4. **Apply Migrations:**
 
-#### Usage
-
-1. **Run the Flask app:**
-
-   ```sh
-   python app.py
+   ```bash
+   python manage.py migrate
    ```
-2. **Open your web browser and navigate to:**
+5. **Create a Superuser:**
 
+   ```bash
+   python manage.py createsuperuser
    ```
-   http://127.0.0.1:5000
+6. **Run the Development Server:**
+
+   ```bash
+   python manage.py runserver
    ```
-3. **Start the interactive story by making your choices and exploring different paths.**
+7. **Access the Application:**
 
-#### Project Structure
+   Open your browser and go to `http://127.0.0.1:8000/`.
+8. **Access the Admin Interface:**
 
-```
-project/
-│
-├── app.py                      # Flask application
-├── data/
-│   └── nodes.json              # JSON file containing story nodes
-├── static/
-│   ├── css/
-│   │   └── styles.css          # CSS styles
-│   └── images/                 # Folder containing story images
-│       ├── forest.jpg
-│       ├── wolf.jpg
-│       ├── treasure_map.jpg
-│       ├── secret_passage.jpg
-│       ├── lost_forest.jpg
-│       ├── treasure.jpg
-│       ├── forest_exit.jpg
-│       ├── temple.jpg
-│       ├── forest_path.jpg
-│       ├── rescue.jpg
-│       ├── wealth.jpg
-│       ├── safe_exit.jpg
-│       └── hero.jpg
-└── templates/
-    └── index.html              # HTML template for the story
-```
+   Go to `http://127.0.0.1:8000/admin/` to manage story nodes and choices.
 
-#### Customization
+### Usage
 
-To customize the story or add new paths, update the `nodes.json` file in the `data` directory. Each node in the JSON file represents a part of the story and includes the text, image, choices, and background color.
+- Navigate through the story by making choices presented on the page.
+- The URL updates to reflect the current story node, while the page content dynamically changes.
 
-Example node structure in `nodes.json`:
+### Managing Content
 
-```json
-{
-    "node_key": {
-        "text": "Story text here.",
-        "image": "images/your_image.jpg",
-        "choices": {
-            "Choice 1 text": "next_node_key",
-            "Choice 2 text": "another_node_key"
-        },
-        "color": "#FFFFFF"  // Background color for this node
-    }
-}
-```
+1. **Add Story Nodes:**
 
-#### License
+   - Go to the Django admin interface.
+   - Add new `StoryNode` objects with the required key, text, image, and color.
+2. **Add Choices:**
 
-This project is licensed under the MIT License.
+   - After creating story nodes, add `Choice` objects that link nodes together.
+3. **Test the Story:**
 
-#### Contact
+   - Visit the homepage and interact with the story to ensure the choices and story flow correctly.
 
-For any questions or suggestions, please contact ISSA IBRAHIM Moubarak at 2im.moubarak@gmail.com.
+### Customization
+
+- **Templates:**
+  - Modify `home.html` to change the layout or styling of the story pages.
+- **Static Files:**
+  - Add custom CSS or JavaScript files to enhance the user experience.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Contributing
+
+Contributions are welcome! Feel free to open issues or submit pull requests to improve the project.
+
+## Acknowledgements
+
+- Django for providing an excellent framework for web development.
+- The community for their helpful resources and tutorials.
